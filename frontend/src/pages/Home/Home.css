@@ -1,0 +1,5 @@
+.hero-container {
+  background-image: url("../../assets/header_jog-1.jpg");
+  background-size: cover;
+  height: 30vh;
+}

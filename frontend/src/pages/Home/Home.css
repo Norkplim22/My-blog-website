@@ -1,5 +1,6 @@
 .hero-container {
-  background-image: url("../../assets/header_jog-1.jpg");
+  background-image: url("../../assets/pexels-kun-fotografi-506396-1230302.jpg");
   background-size: cover;
-  height: 30vh;
+  background-position: center;
+  height: 50vh;
 }

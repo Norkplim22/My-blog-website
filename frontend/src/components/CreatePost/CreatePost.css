@@ -1,0 +1,65 @@
+.create-post-form {
+  width: 80%;
+  margin: 4rem auto;
+  max-width: 800px;
+  padding: 4rem;
+  /* box-shadow: 0 0 10px rgba(128, 128, 128, 0.336); */
+  background-color: white;
+  border-radius: 0.6rem;
+  height: fit-content;
+  /* overflow-y: auto;
+  max-height: 80vh; */
+}
+
+.create-post-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+}
+
+.create-post-form .cover-image-label {
+  width: fit-content;
+}
+
+.create-post-form input,
+.create-post-form select {
+  padding: 0.8rem;
+  font-size: 1.4rem;
+  color: inherit;
+  border: 1px solid rgb(231, 231, 231);
+}
+
+.create-post-form input:focus,
+.create-post-form select:focus {
+  outline: 1px solid var(--button-color);
+}
+
+.create-post-form .textarea {
+  font-size: 1.6rem;
+  min-height: 10vh;
+}
+
+.create-post-form .textarea .codex-editor__redactor {
+  padding-bottom: 2rem !important;
+}
+
+.create-post-form button {
+  background-color: var(--button-color);
+  color: white;
+  padding: 1.4rem 2.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.create-post-form button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.create-post-form button:active {
+  background-color: var(--button-active-color);
+}

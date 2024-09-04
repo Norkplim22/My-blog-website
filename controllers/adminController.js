@@ -4,6 +4,20 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import validator from "validator";
 
+export async function checkAuth(req, res, next) {
+  try {
+    const admin = await Admin.findById(req.admin._id).select("-password");
+
+    if (!admin) {
+      return next(400, createHttpError("Admin not found, Authentication failed! Please login."));
+    }
+
+    admin.populate("blogPosts");
+
+    res.status(201).json(admin);
+  } catch (error) {}
+}
+
 export async function registerAdmin(req, res, next) {
   const { email, password } = req.body;
 
@@ -29,7 +43,7 @@ export async function registerAdmin(req, res, next) {
     const hashedPassword = await bcrypt.hash(password, 10);
     const admin = await Admin.create({ ...req.body, password: hashedPassword });
 
-    // admin.populate("blogPosts");
+    admin.populate("blogPosts");
 
     const accessToken = jwt.sign({ id: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15m" });
     const refreshToken = jwt.sign({ id: admin._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
@@ -76,7 +90,7 @@ export async function loginAdmin(req, res, next) {
       return next(createHttpError(400, "Wrong password, please try again!"));
     }
 
-    // await foundAdmin.populate("blogPosts");
+    await foundAdmin.populate("blogPosts");
 
     const accessToken = jwt.sign({ id: foundAdmin._id }, process.env.JWT_SECRET_KEY, { expiresIn: "15m" });
     const refreshToken = jwt.sign({ id: foundAdmin._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" });
@@ -107,4 +121,33 @@ export async function loginAdmin(req, res, next) {
   }
 }
 
-export async function createPost(req, res, next) {}
+export async function addPost(req, res, next) {
+  const { newPostId } = req.body;
+  const { adminId } = req.params;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No admin found"));
+    }
+
+    const options = {
+      new: true,
+      runValidators: true,
+    };
+
+    foundAdmin.blogPosts = foundAdmin.blogPosts.filter((blogPost) => blogPost._id.toString() !== newPostId);
+
+    await foundAdmin.save();
+
+    const updatedAdmin = await Admin.findByIdAndUpdate(adminId, { $push: { blogPosts: newPostId } }, options);
+
+    await updatedAdmin.populate("blogPosts");
+
+    res.json(updatedAdmin);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error adding post to admin"));
+  }
+}

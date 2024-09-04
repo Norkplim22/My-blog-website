@@ -1,0 +1,12 @@
+.dashboard-layout-container {
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+  min-height: 100vh;
+}
+
+.dashboard-layout-container .outlet-container {
+  display: grid;
+  grid-template-columns: 17rem 1fr;
+  position: relative;
+  /* padding: 2rem; */
+}

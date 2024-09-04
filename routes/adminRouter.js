@@ -1,11 +1,14 @@
 import { Router } from "express";
-import { registerAdmin, loginAdmin, createPost } from "../controllers/adminController.js";
-import upload from "../middlewares/multerConfig.js";
+import { registerAdmin, loginAdmin, addPost, checkAuth } from "../controllers/adminController.js";
+import { authenticateToken } from "../middlewares/authenticateToken.js";
 
 const router = Router();
 
 router.post("/register", registerAdmin);
 router.post("/login", loginAdmin);
-router.post("/createPost", upload.single("image"), createPost);
+
+router.use(authenticateToken);
+router.get("/check-auth", checkAuth);
+router.patch("/addPost/:adminId", addPost);
 
 export default router;

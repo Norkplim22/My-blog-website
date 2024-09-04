@@ -10,11 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tinymce/tinymce-react": "^5.1.1",
+    "@editorjs/code": "^2.9.0",
+    "@editorjs/editorjs": "^2.30.5",
+    "@editorjs/embed": "^2.7.4",
+    "@editorjs/header": "^2.8.7",
+    "@editorjs/image": "^2.9.3",
+    "@editorjs/inline-code": "^1.5.1",
+    "@editorjs/link": "^2.6.2",
+    "@editorjs/list": "^1.10.0",
+    "@editorjs/marker": "^1.4.0",
+    "@editorjs/quote": "^2.7.2",
+    "@editorjs/simple-image": "^1.6.0",
     "html-react-parser": "^5.1.12",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.25.1"
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^6.25.1",
+    "react-spinners": "^0.14.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

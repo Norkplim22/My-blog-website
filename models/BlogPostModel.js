@@ -16,18 +16,17 @@ const blogPostSchema = new Schema(
     },
     category: {
       type: String,
-      enum: ["study-abroad", "stay-motivated", "lifestyle-and-health"], // Replace with your actual categories
-      // required: true,
+      enum: ["study-abroad", "stay-motivated", "lifestyle-and-health"],
     },
     author: {
       type: Schema.Types.ObjectId,
       ref: "Admin",
       required: true,
     },
-    // createdAt: {
-    //   type: Date,
-    //   default: Date.now,
-    // },
+    published: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -5,6 +5,17 @@
   padding: 0 3rem;
   /* border-bottom: 1px solid black; */
   box-shadow: 0 0 10px rgb(196, 195, 195);
+  background-color: white;
+}
+
+.navigation .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navigation .logo img {
+  width: 4rem;
 }
 
 .navigation ul {

@@ -1,0 +1,87 @@
+.preview-page {
+  padding: 2rem 3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  background-color: white;
+}
+
+.preview-page .buttons-container {
+  display: flex;
+  gap: 1rem;
+  position: sticky;
+  background-color: white;
+  width: 100%;
+  top: 0;
+  padding: 2rem 0;
+}
+
+.preview-page .buttons-container button {
+  background-color: var(--button-color);
+  color: white;
+  padding: 1.2rem 2.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preview-page .buttons-container button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.preview-page .buttons-container button:active {
+  background-color: var(--button-active-color);
+}
+
+.preview-page .buttons-container .save-draft-button {
+  background-color: transparent;
+  color: var(--button-color);
+  text-decoration: underline;
+  margin-left: auto;
+}
+
+.preview-page .buttons-container .save-draft-button:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.preview-page .buttons-container .save-draft-button:active {
+  color: white;
+  text-decoration: none;
+}
+
+.preview-page .buttons-container .edit-button {
+  background-color: transparent;
+  color: var(--button-color);
+  border: 1px solid var(--button-color);
+}
+
+.preview-page .buttons-container .edit-button:hover,
+.preview-page .buttons-container .edit-button:active {
+  color: white;
+  /* border: none; */
+}
+
+.preview-page .preview-container {
+  margin-top: 2rem;
+}
+
+.preview-page .preview-container h2 {
+  font-size: 3.4rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.preview-page .paragraph {
+  line-height: 1.8;
+  margin: 2rem 0;
+  font-size: 1.8rem;
+}
+
+.preview-page .list {
+  padding-left: 2rem;
+  line-height: 1.8rem;
+  font-size: 1.8rem;
+}

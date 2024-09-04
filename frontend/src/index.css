@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -6,8 +8,29 @@
 
 :root {
   font-size: 62.5%;
+  --button-color: #226e94;
+  --button-hover-color: #2e8fc0;
+  --button-active-color: #14465f;
 }
 
 body {
   font-size: 1.6rem;
+  font-family: "League Spartan", sans-serif;
+  color: #55575c;
+  background-color: #eee;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.ct {
+  display: none;
+}
+
+.ct--bottom {
+  display: none;
 }

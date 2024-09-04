@@ -1,0 +1,30 @@
+.sidebar {
+  border-right: 1px solid rgb(204, 203, 203);
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: white;
+  /* padding: 2rem 0; */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+}
+
+.sidebar ul li a {
+  display: inline-block;
+  width: 100%;
+  padding: 2rem 0;
+  text-decoration: none;
+  padding-left: 2rem;
+  color: inherit;
+}
+
+.sidebar ul li a.active {
+  border-right: 2px solid grey;
+  background-color: rgb(235, 235, 235);
+  font-weight: 600;
+}

@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 import adminRouter from "./routes/adminRouter.js";
+import blogPostsRouter from "./routes/blogPostsRouter.js";
+import refreshTokenRouter from "./routes/refreshTokenRouter.js";
 // import cron from "node-cron";
 // import axios from "axios";
 
@@ -29,6 +31,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "frontend/dist")));
 
 app.use("/admin", adminRouter);
+app.use("/blogPosts", blogPostsRouter);
+app.use("/refresh-token", refreshTokenRouter);
 
 // Create a ping endpoint
 // app.get("/ping", (req, res) => {

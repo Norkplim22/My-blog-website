@@ -1,9 +1,10 @@
 .preview-page {
   padding: 2rem 3rem;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 6rem auto;
   position: relative;
   background-color: white;
+  border-radius: 0.6rem;
 }
 
 .preview-page .buttons-container {
@@ -68,20 +69,27 @@
   margin-top: 2rem;
 }
 
-.preview-page .preview-container h2 {
+.preview-page .preview-container h1 {
   font-size: 3.4rem;
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.preview-page .paragraph {
+/* .preview-page .preview-container h2,
+.preview-page .preview-container h3,
+.preview-page .preview-container h4,
+.preview-page .preview-container h5 {
+  margin-top: 2rem;
+} */
+
+/* .preview-page .paragraph {
   line-height: 1.8;
   margin: 2rem 0;
   font-size: 1.8rem;
-}
+} */
 
-.preview-page .list {
-  padding-left: 2rem;
-  line-height: 1.8rem;
+/* .preview-page .list {
+  padding-left: 4rem;
+  line-height: 1.8;
   font-size: 1.8rem;
-}
+} */

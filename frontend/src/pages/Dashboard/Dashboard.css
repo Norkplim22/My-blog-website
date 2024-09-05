@@ -1,0 +1,41 @@
+.dashboard-container {
+  padding: 4rem;
+  margin: 0 auto;
+  max-width: 1500px;
+  width: 100%;
+}
+
+.dashboard-container .cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.dashboard-container .cards-container .card {
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.dashboard-container .cards-container .allPosts {
+  background-color: var(--button-hover-color);
+  color: white;
+}
+
+.dashboard-container .cards-container .published {
+  background-color: rgb(37, 145, 37);
+  color: white;
+}
+
+.dashboard-container .cards-container .unpublished {
+  background-color: rgb(146, 55, 55);
+  color: white;
+}
+
+.dashboard-container .card p {
+  font-size: 2.4rem;
+}

@@ -4,10 +4,12 @@ import { createContext, useState } from "react";
 export const DataContext = createContext();
 
 function DataContextProvider({ children }) {
-  const [admin, setAdmin] = useState();
+  const [admin, setAdmin] = useState(null);
   const [currentPost, setCurrentPost] = useState("");
   const [createdPostId, setCreatedPostId] = useState("");
   const [publish, setPublish] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   async function handleHTTPRequestWithToken(url, settings) {
     const firstAccessResponse = await fetch(url, settings);
@@ -50,6 +52,10 @@ function DataContextProvider({ children }) {
         setCreatedPostId,
         publish,
         setPublish,
+        allPosts,
+        setAllPosts,
+        searchInput,
+        setSearchInput,
       }}
     >
       {children}

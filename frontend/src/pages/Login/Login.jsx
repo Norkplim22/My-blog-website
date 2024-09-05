@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import AnimatedPage from "../../components/AnimatedPage";
 
 function Login() {
   const [loginInputs, setLoginInputs] = useState({});
@@ -47,19 +48,21 @@ function Login() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input type="email" name="email" value={loginInputs.email || ""} onChange={handleChange} />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" value={loginInputs.password || ""} onChange={handleChange} />
-        </label>
-        <button>Submit</button>
-      </form>
-    </div>
+    <AnimatedPage>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Email
+            <input type="email" name="email" value={loginInputs.email || ""} onChange={handleChange} />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" value={loginInputs.password || ""} onChange={handleChange} />
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
+    </AnimatedPage>
   );
 }
 

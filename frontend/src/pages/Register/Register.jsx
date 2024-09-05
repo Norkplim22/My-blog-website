@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import { useNavigate } from "react-router-dom";
+import AnimatedPage from "../../components/AnimatedPage";
 
 function Register() {
   const [registerInputs, setRegisterInputs] = useState({});
@@ -49,27 +50,29 @@ function Register() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Firstname
-          <input type="text" name="firstname" value={registerInputs.firstname || ""} onChange={handleChange} />
-        </label>
-        <label>
-          Lastname
-          <input type="text" name="lastname" value={registerInputs.lastname || ""} onChange={handleChange} />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" value={registerInputs.email || ""} onChange={handleChange} />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" value={registerInputs.password || ""} onChange={handleChange} />
-        </label>
-        <button>Submit</button>
-      </form>
-    </div>
+    <AnimatedPage>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Firstname
+            <input type="text" name="firstname" value={registerInputs.firstname || ""} onChange={handleChange} />
+          </label>
+          <label>
+            Lastname
+            <input type="text" name="lastname" value={registerInputs.lastname || ""} onChange={handleChange} />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" value={registerInputs.email || ""} onChange={handleChange} />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" value={registerInputs.password || ""} onChange={handleChange} />
+          </label>
+          <button>Submit</button>
+        </form>
+      </div>
+    </AnimatedPage>
   );
 }
 

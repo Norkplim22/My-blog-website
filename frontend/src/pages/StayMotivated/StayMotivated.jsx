@@ -1,5 +1,11 @@
+import AnimatedPage from "../../components/AnimatedPage";
+
 function StayMotivated() {
-  return <div>StayMotivated</div>;
+  return (
+    <AnimatedPage>
+      <div>StayMotivated</div>;
+    </AnimatedPage>
+  );
 }
 
 export default StayMotivated;

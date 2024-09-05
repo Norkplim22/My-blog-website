@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import StudyAbroad from "./pages/StudyAbroad/StudyAbroad";
 import StayMotivated from "./pages/StayMotivated/StayMotivated";
@@ -15,12 +15,20 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "./context/DataContext";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Password from "./components/Password/Password";
-import { BounceLoader } from "react-spinners";
+import BlogPosts from "./components/BlogPosts/BlogPosts";
+// import { BounceLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const { handleHTTPRequestWithToken, setAdmin } = useContext(DataContext);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     async function checkAuth() {
@@ -59,31 +67,34 @@ function App() {
   if (isInitialLoad) {
     return (
       <div className="loading-spinner">
-        <BounceLoader color={"#2e8fc0"} loading={isInitialLoad} size={40} />
+        <FadeLoader color={"#2e8fc0"} loading={isInitialLoad} size={40} />
       </div>
     );
   }
 
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="create-blog-post" element={<CreatePost />} />
-          <Route path="preview" element={<Preview />} />
-          <Route path="password" element={<Password />} />
-        </Route>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/study-abroad" element={<StudyAbroad />} />
-          <Route path="/stay-motivated" element={<StayMotivated />} />
-          <Route path="/lifestyle-and-health" element={<LifestyleAndHealth />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes key={location.pathname} location={location}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="create-blog-post" element={<CreatePost />} />
+            <Route path="blog-posts" element={<BlogPosts />} />
+            <Route path="preview" element={<Preview />} />
+            <Route path="password" element={<Password />} />
+          </Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/study-abroad" element={<StudyAbroad />} />
+            <Route path="/stay-motivated" element={<StayMotivated />} />
+            <Route path="/lifestyle-and-health" element={<LifestyleAndHealth />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </AnimatePresence>
     </>
   );
 }

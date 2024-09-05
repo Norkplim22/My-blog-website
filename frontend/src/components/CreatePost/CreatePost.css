@@ -39,13 +39,32 @@
 .create-post-form .textarea {
   font-size: 1.6rem;
   min-height: 10vh;
+  border: 1px solid rgb(212, 210, 210);
+  margin-bottom: 2rem;
+  border-radius: 0.4rem;
+  padding: 1rem;
+}
+
+.create-post-form .buttons-container {
+  display: flex;
+  gap: 2rem;
 }
 
 .create-post-form .textarea .codex-editor__redactor {
-  padding-bottom: 2rem !important;
+  padding-bottom: 8rem !important;
 }
 
-.create-post-form button {
+/* .create-post-form .textarea .ce-block__content {
+  max-width: 1200px;
+} */
+
+/* .create-post-form .textarea .ce-popover__items button {
+  background-color: transparent;
+  color: blue;
+} */
+
+.create-post-form .main-button,
+.create-post-form .cancel-button {
   background-color: var(--button-color);
   color: white;
   padding: 1.4rem 2.4rem;
@@ -56,10 +75,28 @@
   transition: all 0.2s;
 }
 
-.create-post-form button:hover {
+.create-post-form .main-button:hover {
   background-color: var(--button-hover-color);
 }
 
-.create-post-form button:active {
+.create-post-form .main-button:active {
   background-color: var(--button-active-color);
+}
+
+.create-post-form .buttons-container .cancel-button {
+  background-color: transparent;
+  color: var(--button-color);
+  border: 1px solid var(--button-color);
+  /* align-items: center; */
+  /* width: 100%; */
+}
+
+.create-post-form .buttons-container .cancel-button:hover {
+  background-color: var(--button-hover-color);
+  color: white;
+}
+
+.create-post-form .buttons-container .cancel-button:active {
+  background-color: var(--button-active-color);
+  color: white;
 }

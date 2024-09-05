@@ -1,5 +1,11 @@
+import AnimatedPage from "../AnimatedPage";
+
 function Password() {
-  return <div>Password</div>;
+  return (
+    <AnimatedPage>
+      <div>Password</div>
+    </AnimatedPage>
+  );
 }
 
 export default Password;

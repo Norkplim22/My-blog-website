@@ -151,3 +151,46 @@ export async function addPost(req, res, next) {
     return next(createHttpError(500, "Server error adding post to admin"));
   }
 }
+
+export async function getAllPosts(req, res, next) {
+  const { adminId } = req.params;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No admin found"));
+    }
+
+    await foundAdmin.populate("blogPosts");
+
+    res.json(foundAdmin);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error getting all blog posts"));
+  }
+}
+
+export async function deletePost(req, res, next) {
+  const { adminId } = req.params;
+  const { deletedPostId } = req.body;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No admin found"));
+    }
+
+    foundAdmin.blogPosts = foundAdmin.blogPosts.filter((blogPost) => blogPost._id.toString() !== deletedPostId);
+
+    await foundAdmin.save();
+
+    await foundAdmin.populate("blogPosts");
+
+    res.json({ message: "The post has been deleted successfully", data: foundAdmin });
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error deleting post from your blog posts"));
+  }
+}

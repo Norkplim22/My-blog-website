@@ -1,5 +1,11 @@
+import AnimatedPage from "../../components/AnimatedPage";
+
 function StudyAbroad() {
-  return <div>StudyAbroad</div>;
+  return (
+    <AnimatedPage>
+      <div>StudyAbroad</div>;
+    </AnimatedPage>
+  );
 }
 
 export default StudyAbroad;

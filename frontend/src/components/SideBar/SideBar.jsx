@@ -14,6 +14,9 @@ function SideBar() {
           <NavLink to="create-blog-post">Create Post</NavLink>
         </li>
         <li>
+          <NavLink to="blog-posts">Blog Posts</NavLink>
+        </li>
+        <li>
           <NavLink to="password">Change password</NavLink>
         </li>
       </ul>

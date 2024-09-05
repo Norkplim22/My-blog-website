@@ -4,58 +4,48 @@ import EditorJS from "@editorjs/editorjs";
 import { tools } from "../tools.component";
 import "./CreatePost.css";
 import { /* useLocation */ useNavigate } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
+import AnimatedPage from "../AnimatedPage";
 
 function CreatePost() {
-  const { setAdmin, admin, setCurrentPost, currentPost, handleHTTPRequestWithToken, setCreatedPostId } =
+  const { setAdmin, admin, setCurrentPost, currentPost, handleHTTPRequestWithToken, setCreatedPostId, setSearchInput } =
     useContext(DataContext);
   const [createPostInputs, setCreatePostInputs] = useState({});
-  // const [content, setContent] = useState([]);
-  // const [testView, setTestView] = useState([]);
   const [image, setImage] = useState(null);
   const [textEditor, setTextEditor] = useState({ isReady: false });
   const [loading, setLoading] = useState(false);
   const editorInstanceRef = useRef(null);
   const imageRef = useRef();
   const navigate = useNavigate();
-  // const location = useLocation();
 
   console.log(admin);
 
   useEffect(() => {
     if (!editorInstanceRef.current) {
-      let editor = new EditorJS({
+      const editor = new EditorJS({
         holder: "textEditor",
         data: currentPost?.content ? JSON.parse(currentPost.content) : {},
         tools: tools,
-        placeholder: "Let's write your content here",
-        // autofocus: true,
+        placeholder: "Write your content here...",
+        autofocus: true, // Enable autofocus if needed
       });
 
       setTextEditor(editor);
-      editorInstanceRef.current = editor; // Store the instance
+      editorInstanceRef.current = editor;
 
-      // Cleanup function to destroy the editor instance when the component unmounts
+      // editorRef.current = true;
+
       return () => {
         if (editorInstanceRef.current && editorInstanceRef.current.destroy) {
-          editorInstanceRef.current.destroy();
-          editorInstanceRef.current = null;
+          editorInstanceRef.current.destroy(); // Destroy editor instance
+          editorInstanceRef.current = null; // Clear reference
         }
       };
     }
-
-    // If post data is passed from Preview, populate the form and editor with it
-    // const post = location.state?.post;
-    // if (post) {
-    //   setCreatePostInputs({ title: post.title, category: post.category });
-    //   setImage(post.coverImage);
-    //   editorInstanceRef.current.isReady.then(() => {
-    //     editorInstanceRef.current.render(JSON.parse(post.content));
-    //   });
-    // }
   }, [currentPost]);
 
   useEffect(() => {
+    setSearchInput("");
     if (currentPost) {
       setCreatePostInputs({
         title: currentPost.title,
@@ -69,7 +59,10 @@ function CreatePost() {
     setCreatePostInputs({ ...createPostInputs, [e.target.name]: e.target.value });
   }
 
-  // console.log(content);
+  function handleCancel() {
+    setCurrentPost("");
+    navigate("/dashboard");
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -97,8 +90,6 @@ function CreatePost() {
         return alert("Write something in your blog to publish it");
       }
     }
-
-    // console.log(savedContent)
 
     const formData = new FormData();
     formData.append("title", createPostInputs.title);
@@ -170,7 +161,7 @@ function CreatePost() {
   if (loading) {
     return (
       <div className="loading-spinner">
-        <BounceLoader color={"#2e8fc0"} loading={loading} size={40} />
+        <FadeLoader color={"#2e8fc0"} loading={loading} size={40} />
       </div>
     );
   }
@@ -179,42 +170,55 @@ function CreatePost() {
 
   console.log(image);
 
+  console.log(currentPost._id);
+
   return (
     <>
-      <form onSubmit={handleSubmit} className="create-post-form">
-        <label>
-          Title
-          <input type="text" name="title" value={createPostInputs.title || ""} onChange={handleChange} required />
-        </label>
-        <label>
-          Category
-          <select name="category" value={createPostInputs.category || ""} onChange={handleChange} required>
-            <option disabled value="">
-              Choose Category
-            </option>
-            <option value="study-abroad">Study Abroad</option>
-            <option value="stay-motivated">Stay Motivated</option>
-            <option value="lifestyle-and-health">Lifestyle and Health</option>
-          </select>
-        </label>
-        <label className="cover-image-label">
-          Cover Image
-          <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} ref={imageRef} required />
-          {/* <img src={image && URL.createObjectURL(image)} width={150} alt="" /> */}
-          {/* {image && <img src={URL.createObjectURL(image)} width={150} alt="Cover" />} */}
-          {image && typeof image === "string" ? (
-            <img src={image} width={150} alt="Cover" />
-          ) : image ? (
-            <img src={URL.createObjectURL(image)} width={150} alt="Cover" />
-          ) : null}
-        </label>
-        <label>
-          Your content
+      <AnimatedPage>
+        <form onSubmit={handleSubmit} className="create-post-form">
+          <label>
+            Title
+            <input type="text" name="title" value={createPostInputs.title || ""} onChange={handleChange} required />
+          </label>
+          <label>
+            Category
+            <select name="category" value={createPostInputs.category || ""} onChange={handleChange} required>
+              <option disabled value="">
+                Choose Category
+              </option>
+              <option value="study-abroad">Study Abroad</option>
+              <option value="stay-motivated">Stay Motivated</option>
+              <option value="lifestyle-and-health">Lifestyle and Health</option>
+            </select>
+          </label>
+          <label className="cover-image-label">
+            Cover Image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+              ref={imageRef}
+              required={currentPost._id ? false : true}
+            />
+            {/* <img src={image && URL.createObjectURL(image)} width={150} alt="" /> */}
+            {/* {image && <img src={URL.createObjectURL(image)} width={150} alt="Cover" />} */}
+            {image && typeof image === "string" ? (
+              <img src={image} width={150} alt="Cover" />
+            ) : image ? (
+              <img src={URL.createObjectURL(image)} width={150} alt="Cover" />
+            ) : null}
+          </label>
+          {/* <label> */}
           <div className="textarea" id="textEditor"></div>
-        </label>
-        <button>Create Post</button>
-      </form>
-      {/* <div>
+          {/* </label> */}
+          <div className="buttons-container">
+            <button className="main-button">{currentPost._id ? "Update Post" : "Create Post"}</button>
+            <button className="cancel-button" onClick={handleCancel}>
+              Cancel
+            </button>
+          </div>
+        </form>
+        {/* <div>
         {testView.map((blogPost) => {
           const content = JSON.parse(blogPost.content);
           return (
@@ -226,6 +230,7 @@ function CreatePost() {
           );
         })}
       </div> */}
+      </AnimatedPage>
     </>
   );
 }

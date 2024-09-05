@@ -1,6 +1,7 @@
 import BlogPost from "../models/BlogPostModel.js";
 import createHttpError from "http-errors";
 import cloudinary from "../middlewares/cloudinaryConfig.js";
+import Admin from "../models/AdminModel.js";
 
 export async function uploadFile(req, res, next) {
   try {
@@ -105,5 +106,22 @@ export async function publishPost(req, res, next) {
   } catch (error) {
     console.error(error);
     return next(500, "Server error publishing post");
+  }
+}
+
+export async function deletePost(req, res, next) {
+  const { postId } = req.params;
+
+  try {
+    const deletedPost = await BlogPost.findByIdAndDelete(postId);
+
+    if (!deletedPost) {
+      return next(createHttpError(404, "No Post found to delete "));
+    }
+
+    res.json({ deletedPostId: deletedPost._id });
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error deleting the blog post"));
   }
 }

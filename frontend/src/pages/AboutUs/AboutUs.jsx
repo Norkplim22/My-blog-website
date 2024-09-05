@@ -1,5 +1,11 @@
+import AnimatedPage from "../../components/AnimatedPage";
+
 function AboutUS() {
-  return <div>AboutUS</div>;
+  return (
+    <AnimatedPage>
+      <div>AboutUS</div>;
+    </AnimatedPage>
+  );
 }
 
 export default AboutUS;

@@ -24,7 +24,8 @@
 }
 
 .sidebar ul li a.active {
-  border-right: 2px solid grey;
-  background-color: rgb(235, 235, 235);
+  border-right: 2px solid var(--button-color);
+  background-color: #d1e9f5;
   font-weight: 600;
+  color: var(--button-color);
 }

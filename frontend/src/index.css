@@ -34,3 +34,8 @@ body {
 .ct--bottom {
   display: none;
 }
+
+.animation-div {
+  position: relative;
+  /* height: 100vh; */
+}

@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 import "./Preview.css";
 import { useNavigate } from "react-router-dom";
+import renderBlock from "../EditorjsParser/EditorjsParser";
+// import AnimatedPage from "../AnimatedPage";
 
 function Preview() {
   const { currentPost, createdPostId, handleHTTPRequestWithToken, publish, setCurrentPost } = useContext(DataContext);
@@ -47,105 +49,26 @@ function Preview() {
     navigate("/dashboard/create-blog-post");
   }
 
-  function renderBlock(block) {
-    switch (block.type) {
-      case "header":
-        return <h2 key={block.id}>{block.data.text}</h2>;
-
-      case "paragraph":
-        return (
-          <p className="paragraph" key={block.id}>
-            {block.data.text}
-          </p>
-        );
-
-      case "list":
-        // Handle both unordered and ordered lists
-        return block.data.style === "unordered" ? (
-          <ul className="list" key={block.id}>
-            {block.data.items.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        ) : (
-          <ol className="list" key={block.id}>
-            {block.data.items.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ol>
-        );
-
-      case "code":
-        return (
-          <pre key={block.id}>
-            <code>{block.data.code}</code>
-          </pre>
-        );
-
-      case "embed":
-        return (
-          <div key={block.id}>
-            <iframe
-              width={block.data.width || "100%"}
-              height={block.data.height || "400px"}
-              src={block.data.embed}
-              allowFullScreen
-            ></iframe>
-            <p>{block.data.caption}</p>
-          </div>
-        );
-
-      case "image":
-        return (
-          <div key={block.id}>
-            <img src={block.data.file.url} alt={block.data.caption || "Image"} width={300} />
-            {block.data.caption && <p>{block.data.caption}</p>}
-          </div>
-        );
-
-      case "inlineCode":
-        return (
-          <pre key={block.id}>
-            <code>{block.data.text}</code>
-          </pre>
-        );
-
-      case "link":
-        return (
-          <a key={block.id} href={block.data.link} target="_blank" rel="noopener noreferrer">
-            {block.data.link}
-          </a>
-        );
-
-      case "marker":
-        return <mark key={block.id}>{block.data.text}</mark>;
-
-      case "quote":
-        return (
-          <blockquote key={block.id}>
-            <p>{block.data.text}</p>
-            <cite>{block.data.caption}</cite>
-          </blockquote>
-        );
-
-      default:
-        return null;
-    }
-  }
-
   return (
+    // <AnimatedPage>
     <div className="preview-page">
       <div className="buttons-container">
-        <button onClick={publishPost}>{publish ? "unpublish" : "publish"}</button>
+        <button onClick={publishPost}>{publish ? "Unpublish" : "Publish"}</button>
         <button className="edit-button" onClick={handleEdit}>
           Edit
         </button>
-        <button className="save-draft-button" onClick={saveAsDraft}>
+        <button
+          className="save-draft-button"
+          style={{
+            display: currentPost._id && !currentPost.published ? "block" : currentPost._id ? "none" : "block",
+          }}
+          onClick={saveAsDraft}
+        >
           Save draft
         </button>
       </div>
       <div className="preview-container">
-        <h2>{currentPost.title}</h2>
+        <h1>{currentPost.title}</h1>
         <img src={currentPost.coverImage} alt="" width="200" style={{ width: "100%" }} />
         {currentPost.content && (
           <>
@@ -163,6 +86,7 @@ function Preview() {
         )}
       </div>
     </div>
+    // </AnimatedPage>
   );
 }
 

@@ -1,5 +1,11 @@
+import AnimatedPage from "../../components/AnimatedPage";
+
 function LifestyleAndHealth() {
-  return <div>LifestyleAndHealth</div>;
+  return (
+    <AnimatedPage>
+      <div>LifestyleAndHealth</div>;
+    </AnimatedPage>
+  );
 }
 
 export default LifestyleAndHealth;

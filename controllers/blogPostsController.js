@@ -1,7 +1,6 @@
 import BlogPost from "../models/BlogPostModel.js";
 import createHttpError from "http-errors";
 import cloudinary from "../middlewares/cloudinaryConfig.js";
-import Admin from "../models/AdminModel.js";
 
 export async function uploadFile(req, res, next) {
   try {
@@ -123,5 +122,20 @@ export async function deletePost(req, res, next) {
   } catch (error) {
     console.error(error);
     return next(createHttpError(500, "Server error deleting the blog post"));
+  }
+}
+
+export async function getAllBlogPosts(req, res, next) {
+  try {
+    const blogPosts = await BlogPost.find({ published: true }).sort({ updatedAt: -1 });
+
+    if (!blogPosts) {
+      return next(createHttpError(404, "No blog posts found"));
+    }
+
+    res.json(blogPosts);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error getting all blogPosts for publishing"));
   }
 }

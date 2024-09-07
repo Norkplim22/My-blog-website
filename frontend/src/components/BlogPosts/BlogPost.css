@@ -104,10 +104,21 @@
   border-radius: 0.4rem;
 }
 
-/* .blogPosts-container .details-container .publish {
-  position: absolute;
-  top: 10px;
-} */
+.blogPosts-container .details-container .featured-true {
+  color: rgb(150, 36, 36);
+}
+
+.blogPosts-container .details-container .featured-true:hover {
+  text-decoration: underline;
+}
+
+.blogPosts-container .details-container .featured-false {
+  color: var(--button-color);
+}
+
+.blogPosts-container .details-container .featured-false:hover {
+  text-decoration: underline;
+}
 
 .blogPosts-container .buttons-container {
   padding: 1rem 2rem;

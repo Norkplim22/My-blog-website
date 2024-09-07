@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import AnimatedPage from "../../components/AnimatedPage";
+import "./Register.css";
 
 function Register() {
   const [registerInputs, setRegisterInputs] = useState({});
@@ -51,7 +52,8 @@ function Register() {
 
   return (
     <AnimatedPage>
-      <div>
+      <div className="register-page">
+        <h2>Register</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Firstname
@@ -71,6 +73,9 @@ function Register() {
           </label>
           <button>Submit</button>
         </form>
+        <p>
+          Already have an account? <span onClick={() => navigate("/login")}>Login</span>
+        </p>
       </div>
     </AnimatedPage>
   );

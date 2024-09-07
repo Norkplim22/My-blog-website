@@ -1,0 +1,82 @@
+.blog-details-page {
+  position: relative;
+  min-height: 100vh;
+}
+
+.blog-details-page .hero-container {
+  position: relative;
+  height: 28rem;
+}
+
+.blog-details-page .hero-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-details-page .blog-post-container {
+  width: 60%;
+  max-width: 900px;
+  position: relative;
+  top: -160px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.blog-details-page .blog-title-container {
+  padding: 6rem 4rem;
+  /* width: 60%; */
+  max-width: 900px;
+  /* margin: 0 auto; */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  text-align: center;
+}
+
+.blog-details-page .blog-title-container .category {
+  padding: 0.4rem 1rem;
+  width: fit-content;
+  border-radius: 0.4rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.blog-details-page .blog-title-container .lifestyle-and-health {
+  background-color: rgb(202, 241, 202);
+  color: rgb(17, 85, 17);
+}
+
+.blog-details-page .blog-title-container .stay-motivated {
+  background-color: rgb(248, 223, 176);
+  color: rgb(99, 71, 20);
+}
+
+.blog-details-page .blog-title-container .study-abroad {
+  background-color: rgb(243, 198, 243);
+  color: rgb(94, 21, 94);
+}
+
+.blog-details-page .lifestyle-and-health {
+  background-color: rgba(17, 85, 17);
+}
+
+.blog-details-page .stay-motivated {
+  background-color: rgba(99, 71, 20);
+}
+
+.blog-details-page .study-abroad {
+  background-color: rgb(94, 21, 94);
+}
+
+.blog-details-page .blog-content {
+  background-color: white;
+  padding: 2rem 4rem 4rem;
+}

@@ -11,12 +11,13 @@
   --button-color: #226e94;
   --button-hover-color: #2e8fc0;
   --button-active-color: #14465f;
+  --font-color: #55575c;
 }
 
 body {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-family: "League Spartan", sans-serif;
-  color: #55575c;
+  color: var(--font-color);
   background-color: #eee;
 }
 

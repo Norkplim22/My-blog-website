@@ -1,48 +1,39 @@
-.home .hero-container {
-  background-image: url("../../assets/pexels-kun-fotografi-506396-1230302.jpg");
-  background-size: cover;
+.study-abroad-page .hero-container {
+  background: rgb(94, 21, 94);
   background-position: center;
-  height: 50vh;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
-  padding: 8rem 15rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 10rem 8rem;
 }
 
-.home .hero-container h1 {
-  font-size: 6.4rem;
-  color: #141414;
-  width: 60%;
+.study-abroad-page .hero-container h1 {
+  font-size: 5rem;
+  color: white;
 }
 
-.home .hero-container p {
-  font-size: 2.4rem;
-  font-weight: 600;
+.study-abroad-page .study-abroad-section {
+  /* max-width: 1200px; */
+  /* width: 90%; */
+  margin: 4rem 0;
 }
 
-.home main {
+.study-abroad-page main {
   padding: 6rem 16rem;
   max-width: 1800px;
   margin: 0 auto;
 }
 
-.home .posts-section {
-  /* max-width: 1200px; */
-  /* width: 90%; */
-  margin: 4rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.home .posts-container {
+.study-abroad-page .study-abroad-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 5rem;
 }
 
-.home .posts-container .card {
+.study-abroad-page .study-abroad-container .card {
   background-color: white;
   border-radius: 0.6rem;
   overflow: hidden;
@@ -56,20 +47,20 @@
   height: 100%;
 }
 
-.home .posts-container .card:hover img {
+.study-abroad-page .study-abroad-container .card:hover img {
   transform: scale(1.1);
 }
 
-.home .posts-container a {
+.study-abroad-page .study-abroad-container a {
   text-decoration: none;
   color: var(--font-color);
 }
 
-.home .posts-container .title {
+.study-abroad-page .study-abroad-container .title {
   line-height: 1.1;
 }
 
-.home .posts-container .title span {
+.study-abroad-page .study-abroad-container .title span {
   background: linear-gradient(black, black);
   background-size: 0px 1px;
   background-position: left bottom;
@@ -78,11 +69,11 @@
   transition: background-size 0.5s;
 }
 
-.home .posts-container .card:hover .title span {
+.study-abroad-page .study-abroad-container .card:hover .title span {
   background-size: 100% 1px;
 }
 
-.home .posts-container .image-container {
+.study-abroad-page .study-abroad-container .image-container {
   width: 100%;
   height: 25rem;
   min-height: 15rem;
@@ -90,7 +81,7 @@
   overflow: hidden;
 }
 
-.home .posts-container img {
+.study-abroad-page .study-abroad-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -102,46 +93,31 @@
   transition: all 0.5s;
 }
 
-.home .posts-container .details {
+.study-abroad-page .study-abroad-container .details {
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 }
 
-.home .posts-container .category {
+.study-abroad-page .study-abroad-container .category {
   padding: 0.4rem 1rem;
   width: fit-content;
   border-radius: 0.4rem;
-  cursor: pointer;
   transition: all 0.3s;
 }
 
-.home .posts-container .category:hover {
-  transform: scale(1.03);
-}
-
-.home .posts-container .lifestyle-and-health {
-  background-color: rgb(202, 241, 202);
-  color: rgb(17, 85, 17);
-}
-
-.home .posts-container .stay-motivated {
-  background-color: rgb(248, 223, 176);
-  color: rgb(99, 71, 20);
-}
-
-.home .posts-container .study-abroad {
+.study-abroad-page .study-abroad-container .study-abroad {
   background-color: rgb(243, 198, 243);
   color: rgb(94, 21, 94);
 }
 
-/* .home .posts-container .title {
+/* .study-abroad-page .study-abroad-container .title {
   background-size: 0px 1px;
   transition: background-size 0.5s;
   width: fit-content;
 } */
 
-.home .posts-container .date {
+.study-abroad-page .study-abroad-container .date {
   color: rgb(136, 136, 136);
 }

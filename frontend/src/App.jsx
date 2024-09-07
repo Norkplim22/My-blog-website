@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import StudyAbroad from "./pages/StudyAbroad/StudyAbroad";
 import StayMotivated from "./pages/StayMotivated/StayMotivated";
@@ -19,11 +19,13 @@ import BlogPosts from "./components/BlogPosts/BlogPosts";
 // import { BounceLoader } from "react-spinners";
 import { FadeLoader } from "react-spinners";
 import { AnimatePresence } from "framer-motion";
+import ProtectedRoute from "./components/ProtectedRoute";
+import BlogPostDetails from "./pages/BlogPostDetails/BlogPostDetails";
 
 function App() {
   const { handleHTTPRequestWithToken, setAdmin } = useContext(DataContext);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -42,7 +44,7 @@ function App() {
           setAdmin(adminData);
         } else {
           setAdmin(null);
-          navigate("/login");
+          // navigate("/login");
           const { error } = await response.json();
 
           if (!isInitialLoad) {
@@ -53,6 +55,7 @@ function App() {
         if (!isInitialLoad) {
           alert(`Your session has expired! ${error.message}`);
           console.log(`Your session has expired! ${error.message}`);
+          setAdmin(null);
         }
       } finally {
         setTimeout(() => {
@@ -78,20 +81,41 @@ function App() {
         <Routes key={location.pathname} location={location}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<DashboardLayout />}>
+
+          {/* Users route */}
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/study-abroad" element={<StudyAbroad />} />
+            <Route path="/study-abroad/:id" element={<BlogPostDetails />} />
+            <Route path="/stay-motivated" element={<StayMotivated />} />
+            <Route path="/stay-motivated/:id" element={<BlogPostDetails />} />
+            <Route path="/lifestyle-and-health" element={<LifestyleAndHealth />} />
+            <Route path="/lifestyle-and-health/:id" element={<BlogPostDetails />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+
+          {/* Admin routes */}
+          {/* <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="create-blog-post" element={<CreatePost />} />
             <Route path="blog-posts" element={<BlogPosts />} />
             <Route path="preview" element={<Preview />} />
             <Route path="password" element={<Password />} />
-          </Route>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/study-abroad" element={<StudyAbroad />} />
-            <Route path="/stay-motivated" element={<StayMotivated />} />
-            <Route path="/lifestyle-and-health" element={<LifestyleAndHealth />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="*" element={<PageNotFound />} />
+          </Route> */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="create-blog-post" element={<CreatePost />} />
+            <Route path="blog-posts" element={<BlogPosts />} />
+            <Route path="preview" element={<Preview />} />
+            <Route path="password" element={<Password />} />
           </Route>
         </Routes>
       </AnimatePresence>

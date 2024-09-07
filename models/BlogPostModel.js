@@ -27,6 +27,10 @@ const blogPostSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    featured: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

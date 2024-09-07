@@ -7,7 +7,7 @@ function DashboardNavigation() {
     <nav className="dashboard-navigation">
       <div className="logo">
         <img src={logo} alt="logo" />
-        <h1>Personal Growth</h1>
+        <h1>Grow</h1>
       </div>
       <ul>
         <li>

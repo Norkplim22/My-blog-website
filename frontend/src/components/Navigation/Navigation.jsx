@@ -1,13 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/image 16.png";
 import "./Navigation.css";
 
 function Navigation() {
+  const navigate = useNavigate();
+
   return (
     <nav className="navigation">
-      <div className="logo">
+      <div className="logo" onClick={() => navigate("/")}>
         <img src={logo} alt="logo" />
-        <h1>Personal Growth</h1>
+        <h1>Grow</h1>
       </div>
       <ul>
         <li>

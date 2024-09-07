@@ -1,4 +1,5 @@
 import Admin from "../models/AdminModel.js";
+import BlogPost from "../models/BlogPostModel.js";
 import createHttpError from "http-errors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -192,5 +193,50 @@ export async function deletePost(req, res, next) {
   } catch (error) {
     console.error(error);
     return next(createHttpError(500, "Server error deleting post from your blog posts"));
+  }
+}
+
+export async function toggleFeatured(req, res, next) {
+  const { postId, featured } = req.body;
+  const { adminId } = req.params;
+
+  try {
+    const admin = await Admin.findById(adminId).populate("featuredPosts");
+
+    const post = await BlogPost.findById(postId);
+
+    if (!post) {
+      return next(createHttpError(404, "Post not found"));
+    }
+
+    const isAlreadyFeatured = admin.featuredPosts.some((p) => p._id.toString() === postId);
+
+    if (featured && !isAlreadyFeatured) {
+      // If trying to feature and the post is not already featured
+      if (admin.featuredPosts.length >= 3) {
+        return next(createHttpError(400, "You can only have 3 featured posts"));
+      }
+
+      // Add post to featured
+      admin.featuredPosts.push(postId);
+      post.featured = true;
+    } else if (!featured && isAlreadyFeatured) {
+      // If trying to un-feature the post
+      admin.featuredPosts = admin.featuredPosts.filter((p) => p._id.toString() !== postId);
+      post.featured = false;
+    } else {
+      return next(createHttpError(400, "Invalid operation"));
+    }
+
+    await admin.save();
+    await post.save();
+
+    res.json({
+      message: `Post has been ${featured ? "featured" : "removed from featured"}.`,
+      updatedPost: post,
+    });
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error toggling featuring post"));
   }
 }

@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import AnimatedPage from "../../components/AnimatedPage";
+import "./Login.css";
 
 function Login() {
   const [loginInputs, setLoginInputs] = useState({});
@@ -49,7 +51,8 @@ function Login() {
 
   return (
     <AnimatedPage>
-      <div>
+      <div className="login-page">
+        <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Email
@@ -61,6 +64,9 @@ function Login() {
           </label>
           <button>Submit</button>
         </form>
+        <p>
+          Don't have an account? <span onClick={() => navigate("/register")}>Register here</span>
+        </p>
       </div>
     </AnimatedPage>
   );

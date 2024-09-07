@@ -24,6 +24,12 @@ const adminSchema = new Schema({
       ref: "BlogPost",
     },
   ],
+  featuredPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "BlogPost",
+    },
+  ],
 });
 
 const Admin = model("Admin", adminSchema);

@@ -75,12 +75,31 @@ export default function renderBlock(block) {
 
     case "embed":
       return (
-        <div key={block.id}>
+        <div
+          key={block.id}
+          style={{
+            width: "100%",
+            // display: "flex",
+            height: "40rem",
+            // justifyContent: "center",
+            position: "relative",
+          }}
+        >
           <iframe
-            width={block.data.width || "100%"}
-            height={block.data.height || "400px"}
+            // width={block.data.width || "100%"}
+            // height={block.data.height }
             src={block.data.embed}
             allowFullScreen
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              position: "absolute",
+              top: "0",
+              right: "0",
+              left: "0",
+              bottom: "0",
+            }}
           ></iframe>
           <p>{block.data.caption}</p>
         </div>

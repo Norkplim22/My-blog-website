@@ -1,5 +1,5 @@
 .layout-container {
   display: grid;
-  grid-template-rows: 6rem 1fr 8rem;
+  grid-template-rows: 6rem 1fr minmax(10rem, auto);
   min-height: 100vh;
 }

@@ -64,7 +64,6 @@ function BlogPosts() {
           <div style={{ display: "flex", gap: "2rem", marginTop: "2rem" }}>
             <button
               style={{
-                // marginLeft: "10px",
                 padding: "1rem 2rem",
                 backgroundColor: "var(--button-color)",
                 color: "white",
@@ -80,7 +79,6 @@ function BlogPosts() {
             </button>
             <button
               style={{
-                // marginLeft: "10px",
                 padding: "1rem 2rem",
                 backgroundColor: "rgb(133, 34, 34)",
                 color: "white",
@@ -102,7 +100,6 @@ function BlogPosts() {
       }
     );
 
-    // if (confirm("Are you sure you want to delete this post?")) {
     async function confirmDelete(t) {
       try {
         const settings = {
@@ -281,7 +278,7 @@ function BlogPosts() {
                           </div>
                           <div className="buttons-container">
                             <button onClick={() => handleEdit(post._id)}>Edit</button>
-                            <button className="delete-button" onClick={() => handleDelete(post)}>
+                            <button className="delete-button" onClick={() => handleDelete(post._id)}>
                               Delete
                             </button>
                           </div>

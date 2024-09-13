@@ -3,7 +3,7 @@ import { DataContext } from "../../context/DataContext";
 import EditorJS from "@editorjs/editorjs";
 import { tools } from "../tools.component";
 import "./CreatePost.css";
-import { /* useLocation */ useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import AnimatedPage from "../AnimatedPage";
 import toast from "react-hot-toast";
@@ -118,7 +118,10 @@ function CreatePost() {
       if (response.ok) {
         const { newPostId, newPost } = await response.json();
         setCurrentPost(newPost);
+        localStorage.setItem("currentPost", JSON.stringify(newPost));
         setCreatedPostId(newPostId);
+        localStorage.setItem("createdPostId", JSON.stringify(newPostId));
+        localStorage.setItem("isPublished", JSON.stringify(newPost.published));
 
         const settings2 = {
           body: JSON.stringify({ newPostId }),
@@ -137,7 +140,6 @@ function CreatePost() {
         if (response2.ok) {
           const data = await response2.json();
           setAdmin(data);
-          // setTestView(data.blogPosts);
           navigate("/dashboard/preview");
         } else {
           const { error } = await response2.json();
@@ -155,7 +157,6 @@ function CreatePost() {
     }
 
     setCreatePostInputs({});
-    // setContent("");
     imageRef.current.value = "";
   }
 
@@ -166,12 +167,6 @@ function CreatePost() {
       </div>
     );
   }
-
-  console.log(admin);
-
-  console.log(image);
-
-  console.log(currentPost._id);
 
   return (
     <>
@@ -201,8 +196,6 @@ function CreatePost() {
               ref={imageRef}
               required={currentPost._id ? false : true}
             />
-            {/* <img src={image && URL.createObjectURL(image)} width={150} alt="" /> */}
-            {/* {image && <img src={URL.createObjectURL(image)} width={150} alt="Cover" />} */}
             {image && typeof image === "string" ? (
               <img src={image} width={150} alt="Cover" />
             ) : image ? (
@@ -219,18 +212,6 @@ function CreatePost() {
             </button>
           </div>
         </form>
-        {/* <div>
-        {testView.map((blogPost) => {
-          const content = JSON.parse(blogPost.content);
-          return (
-            <div key={blogPost._id}>
-              <h2>{blogPost.title}</h2>
-              <img src={blogPost.coverImage} alt="" width="200rem" />
-              <div>{content.blocks.map((block) => renderBlock(block))}</div>
-            </div>
-          );
-        })}
-      </div> */}
       </AnimatedPage>
     </>
   );

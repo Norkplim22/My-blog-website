@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import "./Preview.css";
 import { useNavigate } from "react-router-dom";
@@ -7,8 +7,23 @@ import toast from "react-hot-toast";
 // import AnimatedPage from "../AnimatedPage";
 
 function Preview() {
-  const { currentPost, createdPostId, handleHTTPRequestWithToken, publish, setCurrentPost } = useContext(DataContext);
+  const { currentPost, createdPostId, handleHTTPRequestWithToken, /* publish, */ setCurrentPost } =
+    useContext(DataContext);
+  const [publish, setPublish] = useState(false);
   const navigate = useNavigate();
+
+  console.log(currentPost);
+  console.log(createdPostId);
+  console.log(publish);
+
+  useEffect(() => {
+    const isPublishedLocalStorage = localStorage.getItem("isPublished");
+
+    if (isPublishedLocalStorage) {
+      const parsedIsPublished = JSON.parse(isPublishedLocalStorage);
+      setPublish(parsedIsPublished);
+    }
+  }, []);
 
   async function publishPost() {
     try {
@@ -54,7 +69,7 @@ function Preview() {
     // <AnimatedPage>
     <div className="preview-page">
       <div className="buttons-container">
-        <button onClick={publishPost}>{publish ? "Unpublish" : "Publish"}</button>
+        <button onClick={publishPost}>Publish</button>
         <button className="edit-button" onClick={handleEdit}>
           Edit
         </button>
@@ -66,6 +81,13 @@ function Preview() {
           onClick={saveAsDraft}
         >
           Save draft
+        </button>
+        <button
+          className="save-draft-button"
+          style={{ display: currentPost._id && currentPost.published ? "block" : "none" }}
+          onClick={publishPost}
+        >
+          Unpublish
         </button>
       </div>
       <div className="preview-container">

@@ -81,7 +81,7 @@ export async function createPost(req, res, next) {
     } else {
       post = await BlogPost.create({ ...req.body, coverImage: imageUrl, author: id });
     }
-    console.log(post);
+    // console.log(post);
 
     res.json({ newPostId: post._id, newPost: post });
   } catch (error) {
@@ -104,7 +104,7 @@ export async function publishPost(req, res, next) {
     foundBlogPost.published = published;
     await foundBlogPost.save();
 
-    res.json({ message: "You post has been published successfully" });
+    res.json({ message: `You post has been ${published ? "published" : "unpublished"} successfully` });
   } catch (error) {
     console.error(error);
     return next(500, "Server error publishing post");

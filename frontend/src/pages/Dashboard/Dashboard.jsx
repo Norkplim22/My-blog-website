@@ -35,6 +35,10 @@ function Dashboard() {
     if (admin._id) {
       getAllPost();
     }
+
+    localStorage.removeItem("isPublished");
+    localStorage.removeItem("currentPost");
+    localStorage.removeItem("createdPostId");
   }, [admin?._id]);
 
   const publishedPosts = admin.blogPosts.filter((blogPost) => blogPost.published);

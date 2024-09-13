@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const DataContext = createContext();
 
@@ -7,11 +7,32 @@ function DataContextProvider({ children }) {
   const [admin, setAdmin] = useState(null);
   const [currentPost, setCurrentPost] = useState("");
   const [createdPostId, setCreatedPostId] = useState("");
-  const [publish, setPublish] = useState(false);
+  const [publish, setPublish] = useState(JSON.parse(localStorage.getItem("isPublished")) || false);
   const [allPosts, setAllPosts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+
+  useEffect(() => {
+    const currentPostLocalStorage = localStorage.getItem("currentPost");
+    const createdPostIdLocalStorage = localStorage.getItem("createdPostId");
+    // const isPublishedLocalStorage = localStorage.getItem("isPublished");
+
+    if (currentPostLocalStorage) {
+      const parsed = JSON.parse(currentPostLocalStorage);
+      setCurrentPost(parsed);
+    }
+
+    if (createdPostIdLocalStorage) {
+      const parsedId = JSON.parse(createdPostIdLocalStorage);
+      setCreatedPostId(parsedId);
+    }
+
+    // if (isPublishedLocalStorage) {
+    //   const parsedIsPublished = JSON.parse(isPublishedLocalStorage);
+    //   setPublish(parsedIsPublished);
+    // }
+  }, []);
 
   function toggleOldPasswordVisibility() {
     setShowOldPassword(!showOldPassword);

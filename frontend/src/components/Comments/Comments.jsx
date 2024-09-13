@@ -81,7 +81,6 @@ function Comments() {
           <div style={{ display: "flex", gap: "2rem", marginTop: "2rem" }}>
             <button
               style={{
-                // marginLeft: "10px",
                 padding: "1rem 2rem",
                 backgroundColor: "var(--button-color)",
                 color: "white",
@@ -97,7 +96,6 @@ function Comments() {
             </button>
             <button
               style={{
-                // marginLeft: "10px",
                 padding: "1rem 2rem",
                 backgroundColor: "rgb(133, 34, 34)",
                 color: "white",
@@ -148,9 +146,6 @@ function Comments() {
         toast.dismiss(t.id); // Dismiss the confirmation toast after action
       }
     }
-    // if (confirm("Are you sure you want to delete this comment?")) {
-
-    // }
   }
 
   async function handleAdminReply(postId, commentId) {
@@ -295,22 +290,21 @@ function Comments() {
                     <p className="content">{reply.content}</p>
 
                     {/* Only show approve button for user replies, not admin replies */}
-                    {reply.role !== "Admin" && (
-                      <div className="buttons-container">
+                    {/* {reply.role !== "Admin" && ( */}
+                    <div className="buttons-container">
+                      {reply.role !== "Admin" && (
                         <button
                           className="approve-button"
                           onClick={() => handleApprove(reply._id, post._id, reply.approved)}
                         >
                           {!reply.approved ? "Approve" : "Disapprove"}
                         </button>
-                        <button
-                          className="delete-button"
-                          onClick={() => handleDelete(comment._id, post._id, reply._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                      )}
+                      <button className="delete-button" onClick={() => handleDelete(comment._id, post._id, reply._id)}>
+                        Delete
+                      </button>
+                    </div>
+                    {/* )} */}
                   </div>
                 ))}
               </div>

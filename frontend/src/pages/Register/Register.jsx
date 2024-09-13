@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { DataContext } from "../../context/DataContext";
 import { useNavigate } from "react-router-dom";
 import AnimatedPage from "../../components/AnimatedPage";
+import toast from "react-hot-toast";
 import "./Register.css";
 
 function Register() {
@@ -33,7 +34,7 @@ function Register() {
     };
 
     try {
-      const response = await fetch(`http://localhost:3003/admin/register`, settings);
+      const response = await fetch(`${import.meta.env.VITE_API}/admin/register`, settings);
 
       if (response.ok) {
         const data = await response.json();
@@ -45,6 +46,7 @@ function Register() {
       }
     } catch (error) {
       console.log(error.message);
+      toast.error(error.message);
     }
 
     setRegisterInputs({});

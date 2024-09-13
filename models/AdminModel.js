@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import validator from "validator";
 
 const adminSchema = new Schema({
   firstname: {
@@ -13,6 +14,12 @@ const adminSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    validate: {
+      validator: function (value) {
+        return validator.isEmail(value);
+      },
+      message: "Email is not valid. Please fill a valid email address",
+    },
   },
   password: {
     type: String,
@@ -28,6 +35,25 @@ const adminSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "BlogPost",
+    },
+  ],
+  subscribers: [
+    {
+      email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: {
+          validator: function (value) {
+            return validator.isEmail(value);
+          },
+          message: "Email is not valid. Please fill a valid email address",
+        },
+      },
+      subscribedAt: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
 });

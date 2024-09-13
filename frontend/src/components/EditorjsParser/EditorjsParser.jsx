@@ -79,15 +79,11 @@ export default function renderBlock(block) {
           key={block.id}
           style={{
             width: "100%",
-            // display: "flex",
             height: "40rem",
-            // justifyContent: "center",
             position: "relative",
           }}
         >
           <iframe
-            // width={block.data.width || "100%"}
-            // height={block.data.height }
             src={block.data.embed}
             allowFullScreen
             style={{

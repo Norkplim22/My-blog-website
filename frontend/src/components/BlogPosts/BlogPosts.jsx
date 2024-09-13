@@ -6,26 +6,7 @@ import noData from "../../assets/undraw_Empty_re_opql.png";
 import AnimatedPage from "../AnimatedPage";
 import { motion } from "framer-motion";
 import { containerVariants, cardVariants } from "../AnimateCards";
-
-// // Define the staggered animation for the cards container
-// const containerVariants = {
-//   initial: { opacity: 0 },
-//   animate: {
-//     opacity: 1,
-//     transition: {
-//       staggerChildren: 0.3, // Delay between each card animation
-//     },
-//   },
-//   // exit: { opacity: 0 },
-// };
-
-// // Define the animation for individual cards
-// const cardVariants = {
-//   initial: { opacity: 0, y: 20 },
-//   animate: { opacity: 1, y: 0 },
-//   // exit: { opacity: 0, y: 20 },
-//   // transition: { duration: 1 },
-// };
+import toast from "react-hot-toast";
 
 function BlogPosts() {
   const {
@@ -59,7 +40,7 @@ function BlogPosts() {
           throw new Error(error.message);
         }
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message);
       }
     }
 
@@ -75,7 +56,54 @@ function BlogPosts() {
   }
 
   async function handleDelete(id) {
-    if (confirm("Are you sure you want to delete this post?")) {
+    // Show a toast with the confirmation message
+    toast(
+      (t) => (
+        <span>
+          Are you sure you want to delete this comment?
+          <div style={{ display: "flex", gap: "2rem", marginTop: "2rem" }}>
+            <button
+              style={{
+                // marginLeft: "10px",
+                padding: "1rem 2rem",
+                backgroundColor: "var(--button-color)",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+                flex: "1",
+                borderRadius: "0.6rem",
+                fontWeight: "600",
+              }}
+              onClick={() => confirmDelete(t)} // Call the function to delete
+            >
+              Yes
+            </button>
+            <button
+              style={{
+                // marginLeft: "10px",
+                padding: "1rem 2rem",
+                backgroundColor: "rgb(133, 34, 34)",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+                flex: "1",
+                borderRadius: "0.6rem",
+                fontWeight: "600",
+              }}
+              onClick={() => toast.dismiss(t.id)} // Dismiss the toast
+            >
+              No
+            </button>
+          </div>
+        </span>
+      ),
+      {
+        duration: Infinity, // Keep the toast open until the user decides
+      }
+    );
+
+    // if (confirm("Are you sure you want to delete this post?")) {
+    async function confirmDelete(t) {
       try {
         const settings = {
           method: "DELETE",
@@ -106,7 +134,7 @@ function BlogPosts() {
 
           if (response2.ok) {
             const { message, data } = await response2.json();
-            alert(message);
+            toast.success(message);
             setAllPosts(data.blogPosts);
           } else {
             const { error } = await response2.json();
@@ -117,7 +145,9 @@ function BlogPosts() {
           throw new Error(error.message);
         }
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message);
+      } finally {
+        toast.dismiss(t.id); // Dismiss the confirmation toast after action
       }
     }
   }
@@ -140,7 +170,7 @@ function BlogPosts() {
 
       if (response.ok) {
         const { message, updatedPost } = await response.json();
-        alert(message);
+        toast.success(message);
         setAllPosts((prevPosts) =>
           prevPosts.map((post) => (post._id === updatedPost._id ? { ...post, featured: updatedPost.featured } : post))
         );
@@ -150,7 +180,7 @@ function BlogPosts() {
       }
     } catch (error) {
       console.error(error.message);
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
@@ -231,7 +261,7 @@ function BlogPosts() {
                           </div>
                           <div className="details-container">
                             <p className="date">
-                              {new Date(post.updatedAt).toLocaleDateString("en-US", {
+                              {new Date(post.createdAt).toLocaleDateString("en-US", {
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric",

@@ -1,5 +1,5 @@
 .study-abroad-page .hero-container {
-  background: rgb(94, 21, 94);
+  background: rgb(243, 198, 243);
   background-position: center;
   height: 10vh;
   display: flex;
@@ -7,17 +7,15 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 10rem 8rem;
+  padding: 6rem 8rem;
 }
 
 .study-abroad-page .hero-container h1 {
   font-size: 5rem;
-  color: white;
+  color: rgb(94, 21, 94);
 }
 
 .study-abroad-page .study-abroad-section {
-  /* max-width: 1200px; */
-  /* width: 90%; */
   margin: 4rem 0;
 }
 
@@ -40,7 +38,6 @@
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  /* box-shadow: 0 0 20px rgba(128, 128, 128, 0.486); */
   padding-bottom: 2rem;
   transition: all 0.3s;
   cursor: pointer;
@@ -112,12 +109,40 @@
   color: rgb(94, 21, 94);
 }
 
-/* .study-abroad-page .study-abroad-container .title {
-  background-size: 0px 1px;
-  transition: background-size 0.5s;
-  width: fit-content;
-} */
-
 .study-abroad-page .study-abroad-container .date {
   color: rgb(136, 136, 136);
+}
+
+@media (max-width: 1080px) {
+  .study-abroad-page .hero-container {
+    height: 5vh;
+    padding: 4rem 4rem;
+  }
+
+  .study-abroad-page .hero-container h1 {
+    font-size: 4rem;
+  }
+
+  .study-abroad-page main {
+    padding: 3rem 4rem;
+  }
+
+  .study-abroad-page .study-abroad-container {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .study-abroad-page .hero-container {
+    padding: 3rem 4rem;
+  }
+
+  .study-abroad-page .hero-container h1 {
+    font-size: 2.6rem;
+  }
+
+  .study-abroad-page main {
+    padding: 1rem 3rem;
+  }
 }

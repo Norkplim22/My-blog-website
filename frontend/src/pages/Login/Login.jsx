@@ -32,7 +32,7 @@ function Login() {
     };
 
     try {
-      const response = await fetch(`http://localhost:3003/admin/login`, settings);
+      const response = await fetch(`${import.meta.env.VITE_API}/admin/login`, settings);
 
       if (response.ok) {
         const data = await response.json();

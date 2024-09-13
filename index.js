@@ -8,6 +8,7 @@ import { fileURLToPath } from "url";
 import adminRouter from "./routes/adminRouter.js";
 import blogPostsRouter from "./routes/blogPostsRouter.js";
 import refreshTokenRouter from "./routes/refreshTokenRouter.js";
+import logoutRouter from "./routes/logoutRouter.js";
 // import cron from "node-cron";
 // import axios from "axios";
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "frontend/dist")));
 app.use("/admin", adminRouter);
 app.use("/blogPosts", blogPostsRouter);
 app.use("/refresh-token", refreshTokenRouter);
+app.use("/logout", logoutRouter);
 
 // Create a ping endpoint
 // app.get("/ping", (req, res) => {

@@ -1,0 +1,144 @@
+.profile-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100%;
+  padding: 4rem;
+}
+
+.profile-page .profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem;
+  width: 70%;
+  max-width: 700px;
+  background-color: white;
+  border-radius: 0.8rem;
+}
+
+.profile-page .profile-info p {
+  display: grid;
+  grid-template-columns: 130px auto; /* Column widths for text and span */
+  align-items: center;
+}
+
+.profile-page .profile-info span {
+  font-weight: 600;
+  grid-column: 2;
+}
+
+.profile-page .edit-button {
+  background-color: var(--button-color);
+  color: white;
+  padding: 1.4rem 2.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* font-size: 1.6rem; */
+}
+
+.profile-info .edit-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.profile-info .edit-button:active {
+  background-color: var(--button-active-color);
+}
+
+.profile-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem;
+  width: 60%;
+  max-width: 500px;
+  background-color: white;
+  border-radius: 0.8rem;
+}
+
+.profile-page form h3 {
+  margin-top: 2rem;
+}
+
+.profile-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
+.profile-page input {
+  padding: 0.8rem;
+  font-size: 1.4rem;
+  color: #797979;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 0.4rem;
+}
+
+.profile-page input:focus {
+  outline: 1px solid var(--button-color);
+}
+
+.profile-page .password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile-page .password-input {
+  flex: 1;
+}
+
+.profile-page .password-toggle-icon {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.profile-page .buttons-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.profile-page .main-button,
+.profile-page .cancel-button {
+  background-color: var(--button-color);
+  color: white;
+  padding: 1.4rem 2.4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* font-size: 1.6rem; */
+}
+
+.profile-page .main-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.profile-page .main-button:active {
+  background-color: var(--button-active-color);
+}
+
+.profile-page .buttons-container .cancel-button {
+  background-color: transparent;
+  color: var(--button-color);
+  border: 1px solid var(--button-color);
+  /* align-items: center; */
+  /* width: 100%; */
+}
+
+.profile-page .buttons-container .cancel-button:hover {
+  background-color: var(--button-hover-color);
+  color: white;
+}
+
+.profile-page .buttons-container .cancel-button:active {
+  background-color: var(--button-active-color);
+  color: white;
+}

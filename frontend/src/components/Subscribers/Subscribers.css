@@ -1,0 +1,68 @@
+.subscribers-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.subscribers-page .no-data-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: -1;
+}
+
+.subscribers-page .no-data-img {
+  width: 50rem;
+}
+
+.subscribers-page table {
+  border-collapse: collapse;
+  /* width: 100%; */
+  width: 70%;
+  max-width: 900px;
+  background-color: white;
+  /* font-size: 1.4rem; */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.subscribers-page th,
+.subscribers-page td,
+.subscribers-page table {
+  border: 1px solid rgb(212, 211, 211);
+  padding: 1rem;
+}
+
+.subscribers-page table tr:nth-child(2n) {
+  background-color: rgb(241, 241, 241);
+}
+
+.subscribers-page .delete-button {
+  background-color: rgb(252, 205, 205);
+  color: rgb(107, 22, 22);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.subscribers-page .delete-button:hover {
+  background-color: rgb(165, 36, 36);
+  color: white;
+}
+
+.subscribers-page .delete-button:active {
+  background-color: rgb(78, 16, 16);
+  color: white;
+}

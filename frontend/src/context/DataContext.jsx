@@ -10,6 +10,16 @@ function DataContextProvider({ children }) {
   const [publish, setPublish] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+
+  function toggleOldPasswordVisibility() {
+    setShowOldPassword(!showOldPassword);
+  }
+
+  function toggleNewPasswordVisibility() {
+    setShowNewPassword(!showNewPassword);
+  }
 
   async function handleHTTPRequestWithToken(url, settings) {
     const firstAccessResponse = await fetch(url, settings);
@@ -56,6 +66,12 @@ function DataContextProvider({ children }) {
         setAllPosts,
         searchInput,
         setSearchInput,
+        showOldPassword,
+        setShowOldPassword,
+        showNewPassword,
+        setShowNewPassword,
+        toggleOldPasswordVisibility,
+        toggleNewPasswordVisibility,
       }}
     >
       {children}

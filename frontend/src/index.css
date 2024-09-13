@@ -12,6 +12,7 @@
   --button-hover-color: #2e8fc0;
   --button-active-color: #14465f;
   --font-color: #55575c;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -39,4 +40,24 @@ body {
 .animation-div {
   position: relative;
   /* height: 100vh; */
+}
+
+.go-to-top-button {
+  padding: 1rem 2rem;
+  background-color: var(--button-color);
+  /* border: 1px solid var(--button-color); */
+  color: white;
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+  z-index: 6;
+  border-radius: 0.8rem;
+}
+
+.go-to-top-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.go-to-top-button:active {
+  background-color: var(--button-active-color);
 }

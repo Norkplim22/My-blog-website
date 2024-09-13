@@ -3,6 +3,7 @@ import { DataContext } from "../../context/DataContext";
 import "./Preview.css";
 import { useNavigate } from "react-router-dom";
 import renderBlock from "../EditorjsParser/EditorjsParser";
+import toast from "react-hot-toast";
 // import AnimatedPage from "../AnimatedPage";
 
 function Preview() {
@@ -21,13 +22,13 @@ function Preview() {
       };
 
       const response = await handleHTTPRequestWithToken(
-        `http://localhost:3003/blogPosts/publishPost/${createdPostId}`,
+        `${import.meta.env.VITE_API}/blogPosts/publishPost/${createdPostId}`,
         settings
       );
 
       if (response.ok) {
         const { message } = await response.json();
-        alert(message);
+        toast.success(message);
         setCurrentPost("");
         navigate("/dashboard");
       } else {
@@ -35,12 +36,12 @@ function Preview() {
         throw new Error(error.message);
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 
   function saveAsDraft() {
-    alert("Your post is saved as draft and not published");
+    toast.success("Your post is saved as draft and not published");
     setCurrentPost("");
     navigate("/dashboard");
   }

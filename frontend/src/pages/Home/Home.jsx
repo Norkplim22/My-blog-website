@@ -44,7 +44,7 @@ function Home() {
                           <span>{post.title}</span>
                         </h3>
                         <p className="date">
-                          {new Date(post.updatedAt).toLocaleDateString("en-US", {
+                          {new Date(post.createdAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",
@@ -75,7 +75,7 @@ function Home() {
                           <span>{post.title}</span>
                         </h3>
                         <p className="date">
-                          {new Date(post.updatedAt).toLocaleDateString("en-US", {
+                          {new Date(post.createdAt).toLocaleDateString("en-US", {
                             year: "numeric",
                             month: "long",
                             day: "numeric",

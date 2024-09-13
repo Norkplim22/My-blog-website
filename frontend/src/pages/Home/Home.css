@@ -1,39 +1,41 @@
 .home .hero-container {
-  background-image: url("../../assets/pexels-kun-fotografi-506396-1230302.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.562), rgba(0, 0, 0, 0.507)),
+    url("../../assets/pexels-kun-fotografi-506396-1230302.jpg");
   background-size: cover;
   background-position: center;
-  height: 50vh;
+  /* background-attachment: fixed; */
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-  padding: 8rem 15rem;
+  padding: 8rem 16rem;
 }
 
 .home .hero-container h1 {
   font-size: 6.4rem;
-  color: #141414;
+  color: white;
   width: 60%;
 }
 
 .home .hero-container p {
   font-size: 2.4rem;
   font-weight: 600;
+  width: 60%;
+  color: white;
 }
 
 .home main {
   padding: 6rem 16rem;
-  max-width: 1800px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .home .posts-section {
-  /* max-width: 1200px; */
-  /* width: 90%; */
-  margin: 4rem 0;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  max-width: 1800px;
+  margin: 4rem auto 8rem;
 }
 
 .home .posts-container {
@@ -136,12 +138,53 @@
   color: rgb(94, 21, 94);
 }
 
-/* .home .posts-container .title {
-  background-size: 0px 1px;
-  transition: background-size 0.5s;
-  width: fit-content;
-} */
-
 .home .posts-container .date {
   color: rgb(136, 136, 136);
+}
+
+@media (max-width: 1080px) {
+  .home .hero-container {
+    height: 50vh;
+    padding: 8rem 4rem;
+  }
+
+  .home .hero-container h1 {
+    font-size: 4.8rem;
+  }
+
+  .home .hero-container p {
+    font-size: 2rem;
+  }
+
+  .home main {
+    padding: 6rem 4rem;
+  }
+
+  .home .posts-section {
+    margin: 2rem auto 8rem;
+  }
+
+  .home .posts-container {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .home .hero-container {
+    height: 40vh;
+  }
+
+  .home .hero-container h1 {
+    font-size: 3.2rem;
+    color: white;
+    width: 100%;
+    /* text-align: center; */
+  }
+
+  .home .hero-container p {
+    font-size: 1.6rem;
+    color: white;
+    width: 100%;
+  }
 }

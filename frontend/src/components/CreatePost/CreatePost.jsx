@@ -6,6 +6,7 @@ import "./CreatePost.css";
 import { /* useLocation */ useNavigate } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import AnimatedPage from "../AnimatedPage";
+import toast from "react-hot-toast";
 
 function CreatePost() {
   const { setAdmin, admin, setCurrentPost, currentPost, handleHTTPRequestWithToken, setCreatedPostId, setSearchInput } =
@@ -72,11 +73,11 @@ function CreatePost() {
     const { title, category } = createPostInputs;
 
     if (!title) {
-      return alert("Please enter a title");
+      return toast.error("Please enter a title");
     }
 
     if (!category) {
-      return alert("Please enter a category");
+      return toast.error("Please enter a category");
     }
 
     let savedContent;
@@ -87,7 +88,7 @@ function CreatePost() {
       if (data.blocks.length) {
         savedContent = data; // Store the content directly here
       } else {
-        return alert("Write something in your blog to publish it");
+        return toast.error("Write something in your blog to publish it");
       }
     }
 
@@ -110,7 +111,7 @@ function CreatePost() {
 
     try {
       const response = await handleHTTPRequestWithToken(
-        `http://localhost:3003/blogPosts/createPost/${admin._id}`,
+        `${import.meta.env.VITE_API}/blogPosts/createPost/${admin._id}`,
         settings
       );
 
@@ -129,7 +130,7 @@ function CreatePost() {
         };
 
         const response2 = await handleHTTPRequestWithToken(
-          `http://localhost:3003/admin/addPost/${admin._id}`,
+          `${import.meta.env.VITE_API}/admin/addPost/${admin._id}`,
           settings2
         );
 

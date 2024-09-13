@@ -27,7 +27,7 @@ async function uploadFileByURL(url) {
       method: "POST",
     };
 
-    const response = await fetch("http://localhost:3003/blogPosts/uploadFileByUrl", settings);
+    const response = await fetch(`${import.meta.env.VITE_API}/blogPosts/uploadFileByUrl`, settings);
 
     if (response.ok) {
       const data = await response.json();
@@ -50,7 +50,7 @@ async function uploadFile(file) {
   formData.append("file", file);
 
   try {
-    const response = await fetch("http://localhost:3003/blogPosts/uploadFile", {
+    const response = await fetch(`${import.meta.env.VITE_API}/blogPosts/uploadFile`, {
       body: formData,
       method: "POST",
     });

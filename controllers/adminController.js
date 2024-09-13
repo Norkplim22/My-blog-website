@@ -23,6 +23,13 @@ export async function registerAdmin(req, res, next) {
   const { email, password } = req.body;
 
   try {
+    // Check if there is already an admin in the system
+    const adminExists = await Admin.findOne({});
+
+    if (adminExists) {
+      return next(createHttpError(403, "An admin already exists. Only one admin is allowed."));
+    }
+
     const foundAdmin = await Admin.findOne({ email });
 
     if (foundAdmin) {
@@ -238,5 +245,164 @@ export async function toggleFeatured(req, res, next) {
   } catch (error) {
     console.error(error);
     return next(createHttpError(500, "Server error toggling featuring post"));
+  }
+}
+
+export async function updateProfile(req, res, next) {
+  const { adminId } = req.params;
+  const { formData } = req.body;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No admin found"));
+    }
+
+    if (formData.oldPassword && formData.newPassword) {
+      const checkPasswords = await bcrypt.compare(formData.oldPassword, foundAdmin.password);
+
+      if (!checkPasswords) {
+        return next(createHttpError(400, "Wrong old password, please try again!"));
+      }
+
+      // Hash the new password if password change is requested
+      formData.password = await bcrypt.hash(formData.newPassword, 10);
+    } else {
+      // Do not update password if not provided
+      delete formData.password;
+    }
+
+    const options = {
+      new: true,
+      runValidators: true,
+    };
+
+    // const hashedPassword = await bcrypt.hash(formData.newPassword, 10);
+
+    // Update the admin with the new data
+    const updatedAdmin = await Admin.findByIdAndUpdate(adminId, { $set: formData }, options).lean();
+
+    // Exclude the password before sending the response
+    delete updatedAdmin.password;
+
+    res.json(updatedAdmin);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error updating your profile."));
+  }
+}
+
+export async function addSubscribers(req, res, next) {
+  const { email } = req.body;
+
+  try {
+    // Find the admin (assuming there's only one admin)
+    const admin = await Admin.findOne({});
+
+    if (!admin) {
+      return next(createHttpError(404, "Admin not found"));
+    }
+
+    if (!email) {
+      return next(createHttpError(400, "Please fill the email input."));
+    }
+
+    // Check if the email already exists in the subscribers array
+    const isAlreadySubscribed = admin.subscribers.some((subscriber) => subscriber.email === email);
+
+    if (isAlreadySubscribed) {
+      return next(createHttpError(400, "This email is already subscribed"));
+    }
+
+    const options = {
+      new: true,
+      runValidators: true,
+    };
+
+    // Add the email object to the subscribers array
+    await Admin.findByIdAndUpdate(
+      admin._id,
+      { $push: { subscribers: { email } } }, // Add the email as an object
+      options
+    );
+
+    res.status(200).json({ message: "You have successfully subscribed!" });
+  } catch (error) {
+    // console.error(error);
+    if (error.name === "ValidationError") {
+      const errMessage = Object.values(error.errors)[0].message;
+      console.log(errMessage);
+
+      return next(createHttpError(400, errMessage));
+    }
+    return next(createHttpError(500, "Server error subscribing to the mailing list"));
+  }
+}
+
+export async function getSubscribers(req, res, next) {
+  const { adminId } = req.params;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No Admin found"));
+    }
+
+    const subscribers = foundAdmin.subscribers;
+
+    res.json(subscribers);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error getting subscribers"));
+  }
+}
+
+export async function deleteSubscriber(req, res, next) {
+  const { adminId, subscriberId } = req.params;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No Admin found"));
+    }
+
+    foundAdmin.subscribers = foundAdmin.subscribers.filter((subscriber) => subscriber._id.toString() !== subscriberId);
+
+    await foundAdmin.save();
+
+    res.json({ message: "The subscriber has been deleted successfully", data: foundAdmin.subscribers });
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error deleting the subscriber"));
+  }
+}
+
+export async function getComments(req, res, next) {
+  const { adminId } = req.params;
+
+  try {
+    const foundAdmin = await Admin.findById(adminId);
+
+    if (!foundAdmin) {
+      return next(createHttpError(404, "No Admin found"));
+    }
+
+    await foundAdmin.populate("blogPosts");
+
+    const blogWithComments = foundAdmin.blogPosts
+      .filter((blogPost) => blogPost.comments.length !== 0)
+      .map((blogPost) => ({
+        title: blogPost.title,
+        comments: blogPost.comments,
+        _id: blogPost._id,
+      }));
+
+    res.json(blogWithComments);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error getting comments"));
   }
 }

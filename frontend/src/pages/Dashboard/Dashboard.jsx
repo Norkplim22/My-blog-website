@@ -3,6 +3,7 @@ import { DataContext } from "../../context/DataContext";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import AnimatedPage from "../../components/AnimatedPage";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   const { admin, setAdmin, handleHTTPRequestWithToken, allPosts, setAllPosts, setSearchInput } =
@@ -27,7 +28,7 @@ function Dashboard() {
           throw new Error(error.message);
         }
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message);
       }
     }
 

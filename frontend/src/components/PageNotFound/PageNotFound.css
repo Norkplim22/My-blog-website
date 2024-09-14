@@ -4,11 +4,20 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  height: 100%;
+  min-height: 100vh;
+  /* padding: 10rem 0; */
+  /* margin-bottom: 2rem; */
+}
+
+.page-not-found-container img {
+  width: 60rem;
 }
 
 .page-not-found-container p {
   font-size: 1.8rem;
+  text-align: center;
+  width: 70%;
+  line-height: 1.2;
 }
 
 .page-not-found-container span {
@@ -16,4 +25,10 @@
   text-decoration: underline;
   font-weight: 600;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .page-not-found-container img {
+    width: 30rem;
+  }
 }

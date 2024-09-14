@@ -9,7 +9,7 @@ function PageNotFound() {
   return (
     <AnimatedPage>
       <div className="page-not-found-container">
-        <img src={NotFound} alt="" width={600} />
+        <img src={NotFound} alt="" />
         <h2>Page not found</h2>
         <p>
           The page you are looking for does not exist. Go back to the{" "}

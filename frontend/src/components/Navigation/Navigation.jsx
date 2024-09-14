@@ -59,7 +59,7 @@ function Navigation() {
             <NavLink to="/lifestyle-and-health">LifeStyle & Health</NavLink>
           </li>
           <li>
-            <NavLink to="/about-us">About</NavLink>
+            <NavLink to="/about">About</NavLink>
           </li>
         </ul>
       </nav>

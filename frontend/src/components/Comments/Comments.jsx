@@ -42,7 +42,7 @@ function Comments() {
     getComments();
   }, [adminReply]);
 
-  console.log("Comments Data:", commentsData);
+  // console.log("Comments Data:", commentsData);
 
   async function handleApprove(commentId, postId, isApproved) {
     try {
@@ -182,7 +182,7 @@ function Comments() {
     }
   }
 
-  console.log("AdminReply:", adminReply);
+  // console.log("AdminReply:", adminReply);
 
   if (loading) {
     return (

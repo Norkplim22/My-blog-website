@@ -19,7 +19,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false); // Track edit mode
   const [formData, setFormData] = useState({});
 
-  console.log(admin);
+  // console.log(admin);
 
   useEffect(() => {
     if (isEditing) {
@@ -76,7 +76,7 @@ function Profile() {
       toast.error(error.message);
     }
 
-    console.log("Updated data:", formData);
+    // console.log("Updated data:", formData);
     setIsEditing(false);
     setFormData({});
   }

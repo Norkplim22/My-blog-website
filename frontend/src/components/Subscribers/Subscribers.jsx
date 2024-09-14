@@ -9,7 +9,7 @@ function Subscribers() {
   const { admin, handleHTTPRequestWithToken } = useContext(DataContext);
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(subscribers);
+  // console.log(subscribers);
 
   useLayoutEffect(() => {
     setLoading(true);

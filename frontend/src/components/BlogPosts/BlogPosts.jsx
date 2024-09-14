@@ -21,7 +21,7 @@ function BlogPosts() {
   } = useContext(DataContext);
   const navigate = useNavigate();
 
-  console.log("searchInput:", searchInput);
+  // console.log("searchInput:", searchInput);
 
   useEffect(() => {
     async function getAllPost() {

@@ -10,7 +10,7 @@ function Home() {
   const { allBlogPostsToMain } = useContext(UsersContext);
   const navigate = useNavigate();
 
-  console.log(allBlogPostsToMain);
+  // console.log(allBlogPostsToMain);
 
   const featuredPosts = allBlogPostsToMain.filter((post) => post.featured);
 

@@ -3,7 +3,7 @@ import Home from "./pages/Home/Home";
 import StudyAbroad from "./pages/StudyAbroad/StudyAbroad";
 import StayMotivated from "./pages/StayMotivated/StayMotivated";
 import LifestyleAndHealth from "./pages/LifestyleAndHealth/LifestyleAndHealth";
-import AboutUs from "./pages/AboutUs/AboutUs";
+import About from "./pages/About/About";
 import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -133,7 +133,7 @@ function App() {
             <Route path="/stay-motivated/:id" element={<BlogPostDetails />} />
             <Route path="/lifestyle-and-health" element={<LifestyleAndHealth />} />
             <Route path="/lifestyle-and-health/:id" element={<BlogPostDetails />} />
-            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
 

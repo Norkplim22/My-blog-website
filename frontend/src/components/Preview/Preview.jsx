@@ -12,8 +12,8 @@ function Preview() {
   const [publish, setPublish] = useState(false);
   const navigate = useNavigate();
 
-  console.log(currentPost);
-  console.log(createdPostId);
+  // console.log(currentPost);
+  // console.log(createdPostId);
   console.log(publish);
 
   useEffect(() => {

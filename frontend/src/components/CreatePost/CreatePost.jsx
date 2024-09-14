@@ -19,7 +19,7 @@ function CreatePost() {
   const imageRef = useRef();
   const navigate = useNavigate();
 
-  console.log(admin);
+  // console.log(admin);
 
   useEffect(() => {
     if (!editorInstanceRef.current) {
@@ -84,7 +84,7 @@ function CreatePost() {
 
     if (textEditor.isReady) {
       const data = await textEditor.save();
-      console.log(data);
+      // console.log(data);
       if (data.blocks.length) {
         savedContent = data; // Store the content directly here
       } else {

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsersContext } from "../../context/UsersContext";
 import renderBlock from "../../components/EditorjsParser/EditorjsParser";
@@ -15,15 +15,21 @@ function BlogPostDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const post = allBlogPostsToMain.find((post) => post._id === id);
+  const storedPost = localStorage.getItem(`post-${id}`);
+
+  const post = storedPost ? JSON.parse(storedPost) : allBlogPostsToMain.find((post) => post._id === id);
+
+  useEffect(() => {
+    if (post) {
+      localStorage.setItem(`post-${id}`, JSON.stringify(post));
+    }
+  }, [post, id]);
 
   let commentsLength = post.comments.length;
   let repliesLength = post.comments.reduce((acc, curr) => acc + curr.replies.length, 0);
   let allCommentsLength = commentsLength + repliesLength;
 
-  console.log(allCommentsLength);
-
-  console.log(post);
+  // console.log(post);
 
   function handleGoToCategory(category) {
     navigate(`/${category}`);
@@ -68,8 +74,6 @@ function BlogPostDetails() {
     } catch (error) {
       toast.error(error.message);
     }
-
-    // setCommentInputs({});
   }
 
   async function handleReplyToComment(e, postId, commentId) {
@@ -107,8 +111,6 @@ function BlogPostDetails() {
     } catch (error) {
       toast.error(error.message);
     }
-
-    // setReplyInputs({});
   }
 
   return (

@@ -34,6 +34,23 @@
   outline: 1px solid var(--button-color);
 }
 
+.register-page .password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.register-page .password-input {
+  flex: 1;
+}
+
+.register-page .password-toggle-icon {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
 .register-page button {
   background-color: var(--button-color);
   color: white;

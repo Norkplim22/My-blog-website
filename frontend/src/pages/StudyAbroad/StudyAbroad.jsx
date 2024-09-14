@@ -56,7 +56,6 @@ function StudyAbroad() {
           </section>
         </main>
       </div>
-      ;
     </AnimatedPage>
   );
 }

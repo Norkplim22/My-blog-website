@@ -56,7 +56,6 @@ function LifestyleAndHealth() {
           </section>
         </main>
       </div>
-      ;
     </AnimatedPage>
   );
 }

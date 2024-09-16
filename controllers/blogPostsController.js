@@ -92,7 +92,7 @@ export async function createPost(req, res, next) {
 
 export async function publishPost(req, res, next) {
   const { postId } = req.params;
-  const { published } = req.body;
+  const { string } = req.body;
 
   try {
     const foundBlogPost = await BlogPost.findById(postId);
@@ -101,10 +101,18 @@ export async function publishPost(req, res, next) {
       return next(createHttpError(404, "No post found"));
     }
 
-    foundBlogPost.published = published;
+    if (string === "publish") {
+      foundBlogPost.published = true;
+    }
+
+    if (string === "unpublish") {
+      foundBlogPost.published = false;
+    }
+
+    // foundBlogPost.published = published;
     await foundBlogPost.save();
 
-    res.json({ message: `You post has been ${published ? "published" : "unpublished"} successfully` });
+    res.json({ message: `You post has been ${foundBlogPost.published ? "published" : "unpublished"} successfully` });
   } catch (error) {
     console.error(error);
     return next(500, "Server error publishing post");

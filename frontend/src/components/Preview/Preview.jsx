@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 import "./Preview.css";
 import { useNavigate } from "react-router-dom";
@@ -7,28 +7,13 @@ import toast from "react-hot-toast";
 // import AnimatedPage from "../AnimatedPage";
 
 function Preview() {
-  const { currentPost, createdPostId, handleHTTPRequestWithToken, /* publish, */ setCurrentPost } =
-    useContext(DataContext);
-  const [publish, setPublish] = useState(false);
+  const { currentPost, createdPostId, handleHTTPRequestWithToken, setCurrentPost } = useContext(DataContext);
   const navigate = useNavigate();
 
-  // console.log(currentPost);
-  // console.log(createdPostId);
-  console.log(publish);
-
-  useEffect(() => {
-    const isPublishedLocalStorage = localStorage.getItem("isPublished");
-
-    if (isPublishedLocalStorage) {
-      const parsedIsPublished = JSON.parse(isPublishedLocalStorage);
-      setPublish(parsedIsPublished);
-    }
-  }, []);
-
-  async function publishPost() {
+  async function publishPost(string) {
     try {
       const settings = {
-        body: JSON.stringify({ published: !publish }),
+        body: JSON.stringify({ string }),
         headers: {
           "Content-Type": "application/JSON",
         },
@@ -69,7 +54,7 @@ function Preview() {
     // <AnimatedPage>
     <div className="preview-page">
       <div className="buttons-container">
-        <button onClick={publishPost}>Publish</button>
+        <button onClick={() => publishPost("publish")}>Publish</button>
         <button className="edit-button" onClick={handleEdit}>
           Edit
         </button>
@@ -85,7 +70,7 @@ function Preview() {
         <button
           className="save-draft-button"
           style={{ display: currentPost._id && currentPost.published ? "block" : "none" }}
-          onClick={publishPost}
+          onClick={() => publishPost("unpublish")}
         >
           Unpublish
         </button>

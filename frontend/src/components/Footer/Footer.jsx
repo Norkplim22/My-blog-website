@@ -66,7 +66,7 @@ function Footer() {
             <Link to={"/study-abroad"}>Study Abroad</Link>
             <Link to={"/stay-motivated"}>Stay Motivated</Link>
             <Link to={"/lifestyle-and-health"}>Lifestyle & Health</Link>
-            <Link to={"/about-us"}>About</Link>
+            <Link to={"/about"}>About</Link>
           </div>
         </div>
         <div className="newsletter-container">

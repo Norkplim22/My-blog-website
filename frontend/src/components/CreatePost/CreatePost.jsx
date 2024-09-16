@@ -121,7 +121,7 @@ function CreatePost() {
         localStorage.setItem("currentPost", JSON.stringify(newPost));
         setCreatedPostId(newPostId);
         localStorage.setItem("createdPostId", JSON.stringify(newPostId));
-        localStorage.setItem("isPublished", JSON.stringify(newPost.published));
+        // localStorage.setItem("isPublished", JSON.stringify(newPost.published));
 
         const settings2 = {
           body: JSON.stringify({ newPostId }),

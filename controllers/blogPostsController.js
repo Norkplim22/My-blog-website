@@ -553,3 +553,52 @@ export async function adminReply(req, res, next) {
     return next(createHttpError(500, "Server error replying to the user's comment"));
   }
 }
+
+export async function getPost(req, res, next) {
+  const { postId } = req.params;
+
+  try {
+    const foundPost = await BlogPost.findById(postId).populate({
+      path: "comments",
+      match: { approved: true }, // Only get approved comments
+      populate: {
+        path: "replies",
+        match: { approved: true }, // Only get approved replies
+      },
+    });
+
+    if (!foundPost) {
+      return next(createHttpError(404, "Blog post not found"));
+    }
+
+    // Unescape the comments and replies
+    const unescapedComments = foundPost.comments.map((comment) => {
+      const unescapedReplies = comment.replies.map((reply) => {
+        const replyObj = reply.toObject ? reply.toObject() : reply;
+
+        return {
+          ...replyObj,
+          content: he.unescape(replyObj.content ?? ""), // Unescape reply content
+        };
+      });
+
+      const commentObj = comment.toObject ? comment.toObject() : comment;
+
+      return {
+        ...commentObj,
+        content: he.unescape(commentObj.content ?? ""), // Unescape comment content
+        replies: unescapedReplies, // Set the unescaped replies
+      };
+    });
+
+    const unescapedPost = {
+      ...foundPost.toObject(),
+      comments: unescapedComments, // Set the unescaped comments
+    };
+
+    res.json(unescapedPost);
+  } catch (error) {
+    console.error(error);
+    return next(createHttpError(500, "Server error getting the blog post"));
+  }
+}

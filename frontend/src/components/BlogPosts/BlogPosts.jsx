@@ -190,6 +190,8 @@ function BlogPosts() {
     return acc;
   }, {});
 
+  console.log(allPosts);
+
   return (
     <AnimatedPage>
       <div className="blogPosts-container">

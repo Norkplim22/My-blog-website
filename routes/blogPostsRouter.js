@@ -12,6 +12,7 @@ import {
   deleteComment,
   addReply,
   adminReply,
+  getPost,
 } from "../controllers/blogPostsController.js";
 import upload from "../middlewares/multerConfig.js";
 import { body } from "express-validator";
@@ -40,5 +41,6 @@ router.delete("/comments/deleteComment/:postId/:commentId", deleteComment);
 router.patch("/comments/adminReply/:postId/:commentId/:adminId", adminReply);
 
 router.get("/getAllBlogPosts", getAllBlogPosts);
+router.get("/getPost/:postId", getPost);
 
 export default router;

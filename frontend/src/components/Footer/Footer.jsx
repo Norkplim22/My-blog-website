@@ -62,7 +62,7 @@ function Footer() {
         <div className="links-container">
           <h3>Quick Links</h3>
           <div className="links">
-            <Link to={"/home"}>Home</Link>
+            <Link to={"/"}>Home</Link>
             <Link to={"/study-abroad"}>Study Abroad</Link>
             <Link to={"/stay-motivated"}>Stay Motivated</Link>
             <Link to={"/lifestyle-and-health"}>Lifestyle & Health</Link>

@@ -1,29 +1,56 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { UsersContext } from "../../context/UsersContext";
 import renderBlock from "../../components/EditorjsParser/EditorjsParser";
 import "./BlogPostDetails.css";
 import AnimatedPage from "../../components/AnimatedPage";
 import avatar from "../../assets/avatar.png";
+import { FadeLoader } from "react-spinners";
 import toast from "react-hot-toast";
 
 function BlogPostDetails() {
-  const { allBlogPostsToMain } = useContext(UsersContext);
   const [commentInputs, setCommentInputs] = useState({});
   const [replyInputs, setReplyInputs] = useState({});
   const [formIsOpen, setFormIsOpen] = useState("");
+  const [post, setPost] = useState(null); // State to manage the current post
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const storedPost = localStorage.getItem(`post-${id}`);
-
-  const post = storedPost ? JSON.parse(storedPost) : allBlogPostsToMain.find((post) => post._id === id);
-
+  // Check for stored post in localStorage
   useEffect(() => {
-    if (post) {
-      localStorage.setItem(`post-${id}`, JSON.stringify(post));
+    setLoading(true);
+
+    const storedPost = localStorage.getItem(`post-${id}`);
+    if (storedPost) {
+      setPost(JSON.parse(storedPost));
     }
-  }, [post, id]);
+
+    // Fetch the latest post data from the backend
+    async function fetchPost() {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API}/blogPosts/getPost/${id}`);
+        if (response.ok) {
+          const latestPost = await response.json();
+          setPost(latestPost);
+          localStorage.setItem(`post-${id}`, JSON.stringify(latestPost));
+        }
+      } catch (error) {
+        console.error("Failed to fetch the post", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPost();
+  }, [id]);
+
+  if (!post) {
+    return (
+      <div className="loading-spinner">
+        <FadeLoader color={"#2e8fc0"} loading={loading} size={40} />
+      </div>
+    );
+  }
 
   let commentsLength = post.comments.length;
   let repliesLength = post.comments.reduce((acc, curr) => acc + curr.replies.length, 0);
